@@ -4,27 +4,46 @@
 <meta charset="UTF-8">
 <title>HLS Player</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <style>
-body {
+html, body {
   margin: 0;
-  background: #000;
+  background: black;
 }
-video {
-  width: 100vw;
+
+.player-container {
+  width: 100%;
   height: 100vh;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;   /* Normal mode */
+  background: black;
+}
+
+/* 🔥 When Fullscreen */
+video:fullscreen {
+  object-fit: cover;     /* Fill screen only in fullscreen */
+}
+
+video:-webkit-full-screen {
+  object-fit: cover;     /* Safari support */
 }
 </style>
 </head>
+
 <body>
-  <p style="color:white;
-style:bold;">⚠️We do not host any content on our servers. All the links in this file are collected from public sources.</p>
-<video id="video" controls autoplay playsinline></video>
+  <p style="color:white;">⚠️We do not host any content on our servers. All the links in this file are collected from public sources.</p>
+<div class="player-container">
+  <video id="video" controls autoplay playsinline></video>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <script>
 const video = document.getElementById("video");
 
-// 👇 PUT YOUR .m3u8 LINK HERE
 const m3u8Url = "https://mcncdndigital.com/balleballetv/index.m3u8";
 
 if (Hls.isSupported()) {
@@ -32,7 +51,6 @@ if (Hls.isSupported()) {
   hls.loadSource(m3u8Url);
   hls.attachMedia(video);
 } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-  // Safari / iOS
   video.src = m3u8Url;
 }
 </script>
