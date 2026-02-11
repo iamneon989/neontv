@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HLS Player</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  margin: 0;
+  background: #000;
+}
+video {
+  width: 100vw;
+  height: 100vh;
+}
+</style>
+</head>
+<body>
+  <p style="color:white;
+style:bold;">⚠️We do not host any content on our servers. All the links in this file are collected from public sources.</p>
+<video id="video" controls autoplay playsinline></video>
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script>
+const video = document.getElementById("video");
+
+// 👇 PUT YOUR .m3u8 LINK HERE
+const m3u8Url = "https://cloudfrontnet.vercel.app/tplay/playout/209622/master.m3u8";
+
+if (Hls.isSupported()) {
+  const hls = new Hls();
+  hls.loadSource(m3u8Url);
+  hls.attachMedia(video);
+} else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+  // Safari / iOS
+  video.src = m3u8Url;
+}
+</script>
+
+</body>
+</html>
