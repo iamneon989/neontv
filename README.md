@@ -1,4 +1,4 @@
-Testing purpose only
+for educational & Testing purpose only
 
 ❌ We don't host anything on our servers , all these streams are publically available on web.
 
